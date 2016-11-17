@@ -1,0 +1,17 @@
+from snakebot import Snakebot
+import argparse
+
+def main():
+    parser = argparse.ArgumentParser(description="legget")
+    parser.add_argument("-l", "--log", dest="loglevel",  help="Loglevel. DEBUG|INFO|WARNING|ERROR|CRITICAL", default="INFO")
+    args = parser.parse_args()
+
+    bot = Snakebot(args.loglevel)
+    bot.connect()
+    bot.register_player()
+
+    while True:
+	bot.receive()
+
+if __name__=="__main__":
+    main()
