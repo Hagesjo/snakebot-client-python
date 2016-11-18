@@ -1,4 +1,4 @@
-from snakebot import Snakebot
+from simplesnakebot import SimpleSnakebot
 import argparse
 
 def main():
@@ -6,7 +6,7 @@ def main():
     parser.add_argument("-l", "--log", dest="loglevel",  help="Loglevel. DEBUG|INFO|WARNING|ERROR|CRITICAL", default="INFO")
     args = parser.parse_args()
 
-    bot = Snakebot(args.loglevel)
+    bot = SimpleSnakebot(args.loglevel)
     bot.connect()
     bot.register_player()
 

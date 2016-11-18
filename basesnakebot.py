@@ -7,7 +7,7 @@ import logging
 import messages
 import utils
 
-class Snakebot(object):
+class BaseSnakebot(object):
     def __init__(self, loglevel):
         logging.basicConfig(format="%(asctime)s %(levelname)s  %(message)s", level=getattr(logging, loglevel.upper()))
         self.server = config.SERVER_NAME
@@ -64,12 +64,7 @@ class Snakebot(object):
         exit()
 
     def on_map_update(self, incoming_data):
-        # Directions are UP, DOWN, LEFT, RIGHT
-        # This is the startpoint of your algorithm.
-
-        direction = "DOWN";
-        logging.info("Snake is making move {} at worldtick: {}".format(direction, incoming_data["map"]["worldTick"]))
-        self.send(messages.register_move(direction, incoming_data))
+        raise NotImplementedError
 
     def on_snake_dead(self, incoming_data):
         logging.info("A snake {} died by {}".format(incoming_data["playerId"], incoming_data["deathReason"]))
