@@ -47,7 +47,7 @@ class BaseSnakebot(object):
         # Execute command if exists
         try:
             self.commands[parsed_data["type"]](parsed_data)
-        except KeyError, e:
+        except KeyError:
             logging.warning("Couldn't find command for received game event: {}".format(parsed_data["type"]))
 
     def register_player(self):
