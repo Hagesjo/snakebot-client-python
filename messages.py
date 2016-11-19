@@ -6,7 +6,7 @@ def get_client_info():
     client_info = {}
     client_info_msg["type"] = constants.CLIENT_INFO
     client_info_msg["language"] = "python"
-    client_info_msg["languageVersion"] = "2"
+    client_info_msg["languageVersion"] = platform.python_version()
     client_info_msg["operatingSystem"] = platform.system()
     client_info_msg["operatingSystemVersion"] = platform.release()
     client_info_msg["clientVersion"] = "1.0"
