@@ -16,6 +16,7 @@ class BaseSnakebot(object):
         self.name = config.SNAKE_NAME
         self.mode = config.GAME_MODE
         self.sock = None
+        self.id = None
         self.commands = {
             constants.GAME_ENDED : self.on_game_ended,
             constants.TOURNAMENT_ENDED : self.on_tournament_ended,
@@ -67,7 +68,10 @@ class BaseSnakebot(object):
         raise NotImplementedError
 
     def on_snake_dead(self, incoming_data):
-        logging.info("A snake {} died by {}".format(incoming_data["playerId"], incoming_data["deathReason"]))
+        logging.info("{} snake {} died by {}".format(
+            "Your" if incoming_data["playerId"] == self.id else "A",
+            incoming_data["playerId"],
+            incoming_data["deathReason"]))
 
     def on_game_starting(self, incoming_data):
         pass
@@ -75,6 +79,7 @@ class BaseSnakebot(object):
     def on_player_registered(self, incoming_data):
         logging.info("Player registered.\n\tGame settings:\n{}".format(utils.logging_format(incoming_data)
 ))
+        self.id = incoming_data["receivingPlayerId"]
         game_mode = incoming_data["gameMode"]
 
         if game_mode == "TRAINING":
