@@ -1,7 +1,7 @@
 class GameMap(object):
     def __init__(self, **entries):
         self.__dict__.update(entries)
-        self.methods = entries
+        self.data = entries
 
-    def methods_available(self):
-        return self.methods.keys()
+    def data_available(self):
+        return self.data.keys()
